@@ -1,0 +1,50 @@
+
+/**
+Piyush and Nimit are playing a coin game. They are given n coins with values x1, x2 …. xn where 'n' is always even. They take alternate terms. In each turn, a player picks either the first coin or the last coin from the row and removes it from the row. The value of coin is received by that player. Determine the maximum value that Piyush can win with if he moves first. Both the players play optimally.
+
+ */
+
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        
+      Scanner kb=new Scanner(System.in);
+	  int n=kb.nextInt();
+	  int []arr=new int[n];
+
+     for(int i=0;i<n;i++)
+	  arr[i]=kb.nextInt();
+
+	 long max=coin(arr,0,n-1);
+	 System.out.println(max);
+    }
+ 
+ public static long coin(int []arr,int i,int j) 
+        {
+           if(i>j)
+		     return 0;
+
+   long f1=max(arr[i]+min(coin(arr,i+2,j),coin(arr,i+1,j-1)) , arr[j]+min(coin(arr,i+1,j-1),coin(arr,i,j-2)));
+       
+	   return f1;
+
+		}
+ public static long min(long a,long b)
+    {
+		if(a>b)
+		  return b;
+
+		 return a; 
+	}		
+
+ public static long max(long a1,long b1)
+      {
+          if(a1>b1)
+		    return a1;
+ 
+          return b1;
+	  }
+}
+
+
